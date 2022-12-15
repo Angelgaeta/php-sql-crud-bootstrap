@@ -1,2 +1,2 @@
-# phpCrudBootstrap
+# php-sql-crud-bootstrap
 En cours ... 
