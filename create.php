@@ -28,8 +28,8 @@
                 <input type="text" class="form-control" id="InputPrenom">
             </div>
             <div class="mb-3">
-                <label for="InputNom" class="form-label">Date de naissance du stagiaire</label>
-                <input type="date" class="form-control" id="InputNom" placeholder="">
+                <label for="InputDate" class="form-label">Date de naissance du stagiaire</label>
+                <input type="date" class="form-control" id="InputDate" placeholder="">
             </div>
         </form>
         </div>
