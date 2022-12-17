@@ -1,3 +1,11 @@
+<?php
+require_once 'DBConnect.php';
+
+$query=$dbh->prepare("SELECT * FROM t_stagiaire AS S JOIN t_ville AS V ON V.idVille = S.idVille JOIN t_formation AS F ON F.idFormation = S.idFormation WHERE S.idformation = F.idFormation;")
+$query->execute();
+$stagiaires = $query->fetchALL();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,6 +22,7 @@
             <h1 class="d-flex align-items-center fs-4 text-white mb-0">
             Liste des stagiaires
             </h1>
+            <a href="create.php" class="btn btn-outline-info ms-auto link-light">Créer un stagiaire</a>
         </div>
     </header>
     <section class="container mt-5">
@@ -35,6 +44,31 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php
+                    echo '<h1> Nombre de Stagiaire : '.(count($stagiaires)).'</h1>';
+                    foreach  ($stagiaires as $stagiaire) {
+                        echo'<tr>';
+                            echo '<td>'.$stagiaire['idStagiaire'].'</td>';
+                            echo '<td>'.$stagiaire['nomStagiaire'].'</td>';
+                            echo '<td>'.$stagiaire['prenomStagiaire'].'</td>';
+                            echo '<td>'.$stagiaire['dateNaisStagiaire'].'</td>';
+                            echo '<td>'.$stagiaire['civiliteStagiaire'].'</td>';
+                            echo '<td>'.$stagiaire['adressStagiaire'].'</td>';
+                            echo '<td>'.$stagiaire['cpVille'].'</td>';
+                            echo '<td>'.$stagiaire['nomVille'].'</td>';
+                            echo '<td>'.$stagiaire['mailStagiaire'].'</td>';
+                            echo '<td>'.$stagiaire['acronyme'].'</td>';
+                            echo '<td>
+                            <a href="#" class="btn btn-outline-primary"><i class="bi bi-eye"></i></a>
+                            <a href="#" class="btn btn-outline-success"><i class="bi bi-pencil"></i></a>
+                            <a href="#" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
+                            </td>';
+                        echo'</tr>';
+                        }
+                    ?>
+
+
+
                     <tr>
                         <td>1</td>
                         <td>Hendrix</td>
