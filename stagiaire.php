@@ -1,7 +1,7 @@
 <?php
 require_once 'DBConnect.php'
 $id = $_GET['id'];
-$query = $bdh->prepare('SELECT * FROM t_stagiaire AS S JOIN t_ville AS V ON V.idVille = S.idVille JOIN t_formation AS F ON F.idFormation = S.idformation WHERE S.idStagiaire = ');
+$query = $bdh->prepare('SELECT * FROM t_stagiaire AS S JOIN t_ville AS V ON V.idVille = S.idVille JOIN t_formation AS F ON F.idFormation = S.idformation WHERE S.idStagiaire = $id');
 
 ?>
 
