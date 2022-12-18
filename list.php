@@ -1,9 +1,10 @@
 <?php
 require_once 'DBConnect.php';
 
-$query=$dbh->prepare("SELECT * FROM t_stagiaire AS S JOIN t_ville AS V ON V.idVille = S.idVille JOIN t_formation AS F ON F.idFormation = S.idFormation WHERE S.idformation = F.idFormation;")
+$query=$dbh->prepare("SELECT * FROM t_stagiaire AS S JOIN t_ville AS V ON V.idVille = S.idVille JOIN t_formation AS F ON F.idFormation = S.idformation WHERE S.idformation = F.idFormation;");
 $query->execute();
-$stagiaires = $query->fetchALL();
+$stagiaires = $query->fetchAll();
+//var_dump($stagiaires);
 ?>
 
 <!DOCTYPE html>
@@ -43,72 +44,39 @@ $stagiaires = $query->fetchALL();
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody>                    
                     <?php
-                    echo '<h1> Nombre de Stagiaire : '.(count($stagiaires)).'</h1>';
-                    foreach  ($stagiaires as $stagiaire) {
-                        echo'<tr>';
-                            echo '<td>'.$stagiaire['idStagiaire'].'</td>';
-                            echo '<td>'.$stagiaire['nomStagiaire'].'</td>';
-                            echo '<td>'.$stagiaire['prenomStagiaire'].'</td>';
-                            echo '<td>'.$stagiaire['dateNaisStagiaire'].'</td>';
-                            echo '<td>'.$stagiaire['civiliteStagiaire'].'</td>';
-                            echo '<td>'.$stagiaire['adressStagiaire'].'</td>';
-                            echo '<td>'.$stagiaire['cpVille'].'</td>';
-                            echo '<td>'.$stagiaire['nomVille'].'</td>';
-                            echo '<td>'.$stagiaire['mailStagiaire'].'</td>';
-                            echo '<td>'.$stagiaire['acronyme'].'</td>';
-                            echo '<td>
-                            <a href="#" class="btn btn-outline-primary"><i class="bi bi-eye"></i></a>
-                            <a href="#" class="btn btn-outline-success"><i class="bi bi-pencil"></i></a>
-                            <a href="#" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
-                            </td>';
-                        echo'</tr>';
+                    echo '<h1> Nombre de Stagiaires : '.(count($stagiaires)).'</h1>';
+                        foreach  ($stagiaires as $stagiaire) {
+                            echo'<tr>';
+                                echo '<td>'.$stagiaire['idStagiaire'].'</td>';
+                                echo '<td>'.$stagiaire['nomStagiaire'].'</td>';
+                                echo '<td>'.$stagiaire['prenomStagiaire'].'</td>';
+                                echo '<td>'.$stagiaire['dateNaisStagiaire'].'</td>';
+                                echo '<td>'.$stagiaire['civiliteStagiaire'].'</td>';
+                                echo '<td>'.$stagiaire['adressStagiaire'].'</td>';
+                                echo '<td>'.$stagiaire['cpVille'].'</td>';
+                                echo '<td>'.$stagiaire['nomVille'].'</td>';
+                                echo '<td>'.$stagiaire['mailStagiaire'].'</td>';
+                                echo '<td>'.$stagiaire['acronyme'].'</td>';
+                                echo '<td>
+                                <a href="stagiaire.php?id='.$stagiaire['idStagiaire'].'" class="btn btn-outline-primary"><i class="bi bi-eye"></i></a>
+
+                                <a href="#" class="btn btn-outline-success"><i class="bi bi-pencil"></i></a>
+                                
+                                <a href="#" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
+                                </td>';
+                            echo'</tr>';
                         }
                     ?>
-
-
-
-                    <tr>
-                        <td>1</td>
-                        <td>Hendrix</td>
-                        <td>Jimi</td>
-                        <td>27/11/1942</td>
-                        <td>Monsieur</td>
-                        <td>2 rue Desmoulins</td>
-                        <td>34000</td>
-                        <td>Montpellier</td>
-                        <td>jimi@paradis.com</td>
-                        <td>D2WM</td>
-                        <td>
-                            <a href="#" class="btn btn-outline-primary"><i class="bi bi-eye"></i></a>
-                            <a href="#" class="btn btn-outline-success"><i class="bi bi-pencil"></i></a>
-                            <a href="#" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Joplin</td>
-                        <td>Janis</td>
-                        <td>19/01/1943</td>
-                        <td>Madame</td>
-                        <td>14 rue Des licornes</td>
-                        <td>34000</td>
-                        <td>Montpellier</td>
-                        <td>janis@paradis.com</td>
-                        <td>D2WM</td>
-                        <td>                            
-                            <a href="#" class="btn btn-outline-primary"><i class="bi bi-eye"></i></a>
-                            <a href="#" class="btn btn-outline-success"><i class="bi bi-pencil"></i></a>
-                            <a href="#" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
+            <?php
+                $dbh = null;
+            ?>
         </div>
     </section>
-
     <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </html>
