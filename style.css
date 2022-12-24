@@ -1,0 +1,23 @@
+/* body {
+    margin: 120px 80px 0px 80px;
+} */
+
+header.indexheader{
+    height: 100vh;
+    background-image: url("bgimage2.jpg");
+    background-size: cover;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.indexheader h1{
+    position: absolute;
+    margin: 30% 15% 23% 15%;
+    font-size: 3rem;
+
+    
+}
+
+.indexheader a{
+    margin: 40px;
+}
