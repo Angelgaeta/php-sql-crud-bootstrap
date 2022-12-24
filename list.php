@@ -1,10 +1,12 @@
 <?php
-require_once 'DBConnect.php';
+    require_once 'DBConnect.php';
+    require_once 'navbar.php'; 
+    session_start();
 
-$query=$dbh->prepare("SELECT * FROM t_stagiaire AS S JOIN t_ville AS V ON V.idVille = S.idVille JOIN t_formation AS F ON F.idFormation = S.idformation WHERE S.idformation = F.idFormation;");
-$query->execute();
-$stagiaires = $query->fetchAll();
-//var_dump($stagiaires);
+    $query=$dbh->prepare("SELECT * FROM t_stagiaire AS S JOIN t_ville AS V ON V.idVille = S.idVille JOIN t_formation AS F ON F.idFormation = S.idformation WHERE S.idformation = F.idFormation;");
+    $query->execute();
+    $stagiaires = $query->fetchAll();
+    //var_dump($stagiaires);
 ?>
 
 <!DOCTYPE html>
@@ -16,18 +18,32 @@ $stagiaires = $query->fetchAll();
     <title>Listes des stagiaires</title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"></head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
-    <header class="bd-header bg-dark py-3 d-flex align-items-stretch border-bottom border-dark">
+    <!-- <header class="bd-header bg-dark py-3 d-flex align-items-stretch border-bottom border-dark">
         <div class="container-fluid d-flex align-items-center">
             <h1 class="d-flex align-items-center fs-4 text-white mb-0">
             Liste des stagiaires
             </h1>
             <a href="create.php" class="btn btn-outline-info ms-auto link-light">Créer un stagiaire</a>
+            <a href="createCity.php" class="btn btn-outline-info ms-auto link-light">Ajouter une ville</a>
+            <a href="createFormation.php" class="btn btn-outline-info ms-auto link-light">Ajouter une formation</a>
+            <a href="signin.php" class="btn btn-outline-info ms-auto link-light">S'inscrire</a>
+            <a href="login.php" class="btn btn-outline-info ms-auto link-light">Se connecter</a>
         </div>
-    </header>
-    <section class="container my-5">
-        <div class="row">
+    </header> -->
+    <section>
+        <?php if(isset($_GET['message'])&& !empty($_GET['message'])){ ?>
+                <div class="alert alert-" <?php echo $_GET['statuts'] ?> role="alert">
+                <?php echo $_GET['message']?>
+                <button type="button" name="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        <?php } ?>
+    </section>
+    <section class="container-fluid my-5">
+        <div class="row table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -37,7 +53,7 @@ $stagiaires = $query->fetchAll();
                         <th scope="col">Date de naissance</th>
                         <th scope="col">Civilité</th>
                         <th scope="col">Adresse</th>
-                        <th scope="col">Code Postal</th>
+                        <th scope="col">CP</th>
                         <th scope="col">Ville</th>
                         <th scope="col">Email</th>
                         <th scope="col">Formation</th>
@@ -60,11 +76,11 @@ $stagiaires = $query->fetchAll();
                                 echo '<td>'.$stagiaire['mailStagiaire'].'</td>';
                                 echo '<td>'.$stagiaire['acronyme'].'</td>';
                                 echo '<td>
-                                <a href="stagiaire.php?id='.$stagiaire['idStagiaire'].'" class="btn btn-outline-primary"><i class="bi bi-eye"></i></a>
+                                <a href="stagiaire.php?id='.$stagiaire['idStagiaire'].'" class="btn btn-outline-primary" ><i class="bi bi-eye"></i></a>
 
-                                <a href="#" class="btn btn-outline-success"><i class="bi bi-pencil"></i></a>
+                                <a href="update.php?id='.$stagiaire['idStagiaire'].'" class="btn btn-outline-success"><i class="bi bi-pencil"></i></a>
                                 
-                                <a href="#" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
+                                <a href="delete.php?id='.$stagiaire['idStagiaire'].'"  class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
                                 </td>';
                             echo'</tr>';
                         }
